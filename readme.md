@@ -3,7 +3,7 @@
 
 <h3>Kagameshi is a discord bot written in python that allows
 you to crowdsource caption-image pairs on discord.<h3>
----
+
 ## How does it work
 
 Kagameshi selects a random image from a specified folder
