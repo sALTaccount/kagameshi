@@ -81,3 +81,5 @@ Responses are stored in the following format and order:
 | bucket     | VARCHAR | The bucket that the image is stored in    |
 | user_id    | VARCHAR | The discord user ID of the submitter      |
 | response   | VARCHAR | The caption written by the submitter      |
+
+These are stored in a table named kagameshi_responses
