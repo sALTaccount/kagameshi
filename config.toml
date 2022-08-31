@@ -1,0 +1,11 @@
+token = ''
+bucket = ''
+channel = ''
+
+timer_delay = 20
+
+#postgresql server config
+host='localhost'
+database='postgres'
+user='postgres'
+password='password'
