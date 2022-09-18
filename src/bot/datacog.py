@@ -23,8 +23,11 @@ class DataCog(commands.Cog, name='Data', description='Used by volunteers to labe
         posts = self.dbclient.post_list(tags=tags, limit=25, page=page_number)
         new_posts = []
         for post in posts:
-            if json_interface.get_response(None, int(post['id'])) is None:
-                new_posts.append(post)
+            try:
+                if json_interface.get_response(None, int(post['id'])) is None:
+                    new_posts.append(post)
+            except Exception:
+                pass
         if len(new_posts) != 0:
             return new_posts
         else:
