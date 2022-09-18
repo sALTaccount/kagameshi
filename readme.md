@@ -2,14 +2,12 @@
 
 
 <h3>Kagameshi is a discord bot written in python that allows
-you to crowdsource caption-image pairs on discord.<h3>
+you to crowdsource caption-image pairs from Danbooru on discord.<h3>
 
 ## How does it work
 
-Kagameshi selects a random image from a specified folder
-and uploads it to discord in a specified channel. Users
-can then reply to the image in order to create a caption
-image pair. Responses are stored in a postgresql database.
+Kagameshi downloads images from the danbooru front page and displays them on discord.
+Replying to that message will add a caption-image pair to the database.
 
 ---
 ### Installation
@@ -17,69 +15,22 @@ image pair. Responses are stored in a postgresql database.
    ```sh
    git clone https://github.com/sALTaccount/kagameshi.git
    ```
-2. Install requirements
-   ```sh
-   pip install -r requirements.txt
-   ```
-   Install a [postgresql server](https://www.postgresql.org/download/) if you don't already have one
 
-
-3. Put your data a folder named `dataset`
-
-    Don't put your data directly into the folder, 
-    put it inside of a "bucket" folder (eg `/dataset/0001/image.jpg`).
-    Split larger datasets into multiple buckets.
-
-
-4. Configure your `config.toml`
+2. Configure your `config.toml`
 
     Change `token` to your discord bot token
-
-    Change `bucket` to your dataset bucket ID
-
-    Change `channel` to the discord channel ID you want to use
-
-    Change `host`, `database`, `user`, and `password` to your postgresql credentials
-
-    All of the above are strings
-
 
 ---
 ## Usage
 
-Reply to the image sent by the bot with your caption and it will be added to the database
+Reply to the image sent by the bot with your caption, and it will be added to the database
 
 
-![test](https://i.ibb.co/9Wjnyhs/image.png)
+![img1](https://camo.githubusercontent.com/08af2a8a215e872d6af524483acafd1c63ba6316b1da73e6e0d4545f3aaf4b96/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f313032303135373933333431393530333639362f313032303532393035383037343836393835302f756e6b6e6f776e2e706e67)
+![img2](https://camo.githubusercontent.com/c2daa28333891e4fc4741819c9f423ef7b089b89d871183cf3700c3e62bb277c/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f6174746163686d656e74732f313032303135373933333431393530333639362f313032303532393731303130383739303934342f756e6b6e6f776e2e706e67)
 
-If the response is successfully recorded, the bot will react with check mark.
-If the response was not recorded, the bot will react with an X.
+The bot will react with a check mark if your response is properly recorded.
 
-You MUST reply to the image for the response to be recorded. This is to mitigate
-messages that were not intended to be captions from being recorded as such.
-
-Replies to images later than the last image sent will also not be recorded.
-
-Once an image has been shown once, it will not be randomly selected again.
-Upon bot restart, Kagameshi queries the postgresql server for all recorded captions,
-and will not show any images in which a caption is already recorded.
-
-Responses can be retrieved with an sql shell (such as pSql) with
-```
-SELECT * FROM kagameshi_responses;
-```
----
-## Postgresql
-Kagameshi uses postgresql to store recorded captions.
-
-Responses are stored in the following format and order:
-
-
-| name       | type    | description                               |
-|------------|---------|-------------------------------------------|
-| image_name | VARCHAR | The name of the image the response is for |
-| bucket     | VARCHAR | The bucket that the image is stored in    |
-| user_id    | VARCHAR | The discord user ID of the submitter      |
-| response   | VARCHAR | The caption written by the submitter      |
-
-These are stored in a table named kagameshi_responses
+## Responses
+The responses are stored in a file called `responses.json`, created in the directory where the program was run.
+In the JSON file, the key is the Danbooru post ID, and the value is the prompt that the user typed.

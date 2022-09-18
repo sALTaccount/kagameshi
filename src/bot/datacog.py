@@ -2,7 +2,6 @@ import random
 import traceback
 import pybooru
 import discord
-from discord.commands import SlashCommandGroup
 from discord.ext import commands
 from typing import Optional
 
@@ -10,6 +9,10 @@ import json_interface
 
 embed_color = discord.Colour.from_rgb(215, 195, 134)
 page_number = 1
+
+
+async def post_searcher():
+    return list(json_interface.get_responses(None).keys())
 
 
 class DataCog(commands.Cog, name='Data', description='Used by volunteers to label data.'):
@@ -45,9 +48,6 @@ class DataCog(commands.Cog, name='Data', description='Used by volunteers to labe
                 tags = tags + ' ' + self.default_tags
             post = random.choice(self.get_new_posts(tags))
         return post
-
-    async def post_searcher(ctx: discord.AutocompleteContext):
-        return list(json_interface.get_responses(None).keys())
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
