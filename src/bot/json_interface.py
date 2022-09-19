@@ -9,7 +9,7 @@ except FileNotFoundError:
 
 def insert_response(connection, image_id, user_id, response):
     global responses
-    responses[int(image_id)] = response
+    responses[str(image_id)] = response
     with open('responses.json', 'w', encoding='utf-8') as f:
         f.write(json.dumps(responses))
 
@@ -23,6 +23,6 @@ def get_responses(connection):
 def get_response(connection, post_id):
     global responses
     try:
-        return responses[int(post_id)]
+        return responses[str(post_id)]
     except KeyError:
         return None
