@@ -18,7 +18,7 @@ class DataCog(commands.Cog, name='Data', description='Used by volunteers to labe
     def __init__(self, bot: discord.Bot):
         self.bot = bot
         self.dbclient = pybooru.Danbooru('danbooru', username='haru1367')
-        self.default_tags = 'rating:general'
+        self.default_tags = 'rating:general score:>7'
 
     def get_post(self, tags=None, id=None):
         if id is not None:
