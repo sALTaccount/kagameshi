@@ -1,8 +1,7 @@
 git+https://github.com/Pycord-Development/pycord
 psycopg2~=2.9.3
 toml~=0.10.2
-#git+https://github.com/mlfoundations/open_clip
-#torch>=1.9.0
-#torchvision
-pybooru~=4.2.2
-discord~=1.7.3
+open_clip_torch
+torch>=1.9.0
+torchvision
+pybooru
